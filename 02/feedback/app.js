@@ -8,14 +8,28 @@ http
         if (url === '/') {
             fs.readFile('./views/index.html',function (err,data) {
                 if(err){
-                    return console.log('404 Not Found');
+                    return res.end('404 Not Found');
+                }
+                res.end(data);
+            })
+        } else if (url === '/post') {
+            fs.readFile('./views/post.html',function (err,data) {
+                if(err){
+                    return res.end('404 Not Found');
                 }
                 res.end(data);
             })
         } else if (url.indexOf('/public/') === 0) {
             fs.readFile('.'+url,function(err,data){
                 if (err) {
-                    res.end('404 Not Found');
+                    return res.end('404 Not Found');
+                }
+                res.end(data);
+            })
+        } else {
+            fs.readFile('./views/404.html',function (err,data) {
+                if(err){
+                    return res.end('404 Not Found.')
                 }
                 res.end(data);
             })
