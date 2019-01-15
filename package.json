@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/Ansel-T/node-study#readme",
   "dependencies": {
-    "art-template": "^4.13.2"
+    "art-template": "^4.13.2",
+    "express": "^4.16.4",
+    "express-art-template": "^1.0.1"
   }
 }
