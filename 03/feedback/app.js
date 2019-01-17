@@ -46,5 +46,5 @@ app.get('/pinglun',function (req,res) {
 });
 
 app.listen('3000',function () {
-    console.log('server runding...');
+    console.log('server running...');
 })
