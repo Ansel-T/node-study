@@ -86,4 +86,44 @@ app.get('/', function (req, res) {
 // app.set('views', 目录路径)
 ```
 
+#### 在 express 中获取GET请求参数
+
+express 中内置了一个API,可以通过 req.query 获取
+
+```
+app.get('/leaveMsg',function (req,res) {
+    let comment = req.query;
+    console.log(comment); //{ name: 'jim', message: '321456789 ' }
+});
+```
+
+###  在 express 中获取POST请求参数
+
+express 中灭有内置可以直接获取请求参数的API ，需要使用一个第三方中间件 `body-parser` 来实现
+
+安装：
+```
+$ npm install body-parser
+```
+配置：
+```
+//0.引入
+var bodyParser = require('body-parser')
+
+//2.配置
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+```
+使用：
+```
+app.post('/leaveMsg',function (req,res) {
+    let comment = req.body;
+    console.log(comment);
+});
+```
+
+
 ### 基本感知
