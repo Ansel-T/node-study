@@ -20,7 +20,7 @@
 + 切换下载源
 
 ```
-npm config set registry  htts://registry.npm.taobao.org
+npm config set registry  https://registry.npm.taobao.org
 
 ```
 
@@ -59,7 +59,7 @@ app.use('/static/',express.static('public'));
 具体可以参考 express 官方快速入门 很清楚！！！
 
 #### express 中使用art-template
-+ 安装 express 和 express-art-tempalte
++ 安装 express 和 express-art-template
 ```
 npm install --save art-template
 npm install --save express-art-template
