@@ -1,0 +1,11 @@
+{
+    "students":[
+        {"id":"1","name":"zs","gender":0,"age":18,"hobbies":"唱歌、跑步"},
+        {"id":"2","name":"ls","gender":0,"age":18,"hobbies":"唱歌、跑步"},
+        {"id":"3","name":"zs","gender":0,"age":18,"hobbies":"唱歌、跑步"},
+        {"id":"4","name":"zs","gender":0,"age":18,"hobbies":"唱歌、跑步"},
+        {"id":"5","name":"zs","gender":0,"age":18,"hobbies":"唱歌、跑步"},
+        {"id":"6","name":"zs","gender":0,"age":18,"hobbies":"唱歌、跑步"},
+        {"id":"7","name":"zs","gender":0,"age":18,"hobbies":"唱歌、跑步"}
+    ]
+}
