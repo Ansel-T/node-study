@@ -99,7 +99,7 @@ app.get('/leaveMsg',function (req,res) {
 
 ###  在 express 中获取POST请求参数
 
-express 中灭有内置可以直接获取请求参数的API ，需要使用一个第三方中间件 `body-parser` 来实现
+express 中没有内置可以直接获取请求参数的API ，需要使用一个第三方中间件 `body-parser` 来实现
 
 安装：
 ```
