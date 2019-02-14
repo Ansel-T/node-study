@@ -20,21 +20,11 @@ router.get('/students/new',function (req,res) {
 });
 
 router.post('/students/new',function (req,res) {
-    let info = req.body;
-    fs.readFile('./db.json',function(err,data){
+    students.save(req.body,function (err) {
         if(err){
-            return res.end('Not Fount 404');
+            return res.status(500).send('Server error');
         }
-        let studentsObj = JSON.parse(data);
-        info.id = 9;
-        studentsObj.students.push(req.body);
-        studentsObj = JSON.stringify(studentsObj);
-        fs.writeFile('./db.json',studentsObj,function (err) {
-            if(err){
-                return res.end('写入失败');
-            }
-            res.redirect('/students');
-        })
+        res.redirect('/students');
     })
 });
 
