@@ -125,5 +125,44 @@ app.post('/leaveMsg',function (req,res) {
 });
 ```
 
+### router模块
++ Express 提供了一种更好的方式,专门用来包装路由的
+
+```
+//创建一个js 文件（router.js） 首先引入`express`
+
+const express = require('express');
+
+// 1. 创建一个路由容器
+const router = express.Router();
+
+// 2. 把路由都挂载到 router 路由容器中
+
+/*
+ * 渲染添加学生页面
+ */
+router.get('/students/new', function (req, res) {
+  //code ....
+})
+
+/*
+ * 处理添加学生
+ */
+router.post('/students/new', function (req, res) {
+  //code ....
+})
+
+//3. 在入口文件中引入路由模块（router.js），然后再挂在到app 服务中
+
+const router = require('./router');
+
+// 把路由容器挂载到 app 服务中
+app.use(router)
+
+//注：配置模板引擎和 body-parser 一定要在 app.use(router) 挂载路由之前
+
+```
+
+
 
 ### 基本感知
