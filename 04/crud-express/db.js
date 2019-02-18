@@ -14,6 +14,7 @@
         if(err){
             callback(err);
         }
+        console.log(data);
         callback(null,JSON.parse(data).students);
     })
  };
@@ -40,8 +41,51 @@
  }
 
  /**
+  * 获取指定学员数据
+  */
+
+  exports.findById = function(id,callback){
+      fs.readFile(dbPath,'utf-8',function (err,data) {
+          if(err){
+            callback(err);
+          }
+
+          let studentsArr = JSON.parse(data).students;
+          let student = studentsArr.find(function (v,i) {
+              return Number(id) === Number(v.id);
+          })
+          callback(null,student);
+      })
+  }
+
+
+ /**
   * 更新学员数据
   */
+
+  exports.updated = function (student,callback) {
+      fs.readFile(dbPath,'utf-8',function(err,data){
+          if(err){
+              callback(err);
+          }
+          let studentsArr = JSON.parse(data).students;
+          let info = studentsArr.find(function (v,i) {
+              return v.id === student.id;
+          })
+
+          for(let key in student){
+            info[key] = student[key];
+          }
+
+          fs.writeFile(dbPath,JSON.stringify({students:studentsArr}),function (err) {
+              if(err){
+                  callback(err);
+              }
+              callback(null);
+          })
+
+      })
+  }
 
   /**
    * 删除学员数据

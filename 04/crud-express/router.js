@@ -8,6 +8,7 @@ router.get('/students',function (req,res) {
         if(err){
             return res.status(500).send('Server error.');
         }
+        console.log(students);
         res.render('index.html',{
             courses:['html','css','javascript','nodejs'],
             students:students
@@ -23,17 +24,31 @@ router.post('/students/new',function (req,res) {
     students.save(req.body,function (err) {
         if(err){
             return res.status(500).send('Server error');
-        }
+        };
         res.redirect('/students');
     })
 });
 
 router.get('/students/edit',function (req,res) {
+    console.log(req.query);
+    students.findById(req.query.id,function (err,info) {
+        if(err){
+            return res.status(500).send('Server error');
+        };
+        res.render('edit.html',{
+            info
+        });
+    })
 
 });
 
 router.post('/students/edit',function (req,res) {
-
+    students.updated(req.body,function (err) {
+        if(err){
+            return res.status(500).send('Server error');
+        };
+        res.redirect('/students');
+    })
 });
 
 router.get('/students/delete',function (req,res) {
