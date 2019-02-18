@@ -14,7 +14,6 @@
         if(err){
             callback(err);
         }
-        console.log(data);
         callback(null,JSON.parse(data).students);
     })
  };
@@ -90,3 +89,25 @@
   /**
    * 删除学员数据
    */
+
+   exports.delete = function (id,callback) {
+       fs.readFile(dbPath,'utf-8',function (err,data) {
+           if(err){
+               callback(err);
+           }
+
+           let studentsArr = JSON.parse(data).students;
+
+           let idx = studentsArr.findIndex(function(item){
+               return item.id === id;
+           })
+
+           studentsArr.splice(idx,1);
+           fs.writeFile(dbPath,JSON.stringify({students:studentsArr}),function (err) {
+               if(err){
+                   callback(err);
+               }
+               callback(null);
+           })
+       })
+   }

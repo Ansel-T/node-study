@@ -8,7 +8,6 @@ router.get('/students',function (req,res) {
         if(err){
             return res.status(500).send('Server error.');
         }
-        console.log(students);
         res.render('index.html',{
             courses:['html','css','javascript','nodejs'],
             students:students
@@ -52,7 +51,12 @@ router.post('/students/edit',function (req,res) {
 });
 
 router.get('/students/delete',function (req,res) {
-
+    students.delete(req.query.id,function (err) {
+        if(err){
+            return res.status(500).send('Server error');
+        }
+        res.redirect('/students');
+    })
 });
 
 module.exports = router;
