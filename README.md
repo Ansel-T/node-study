@@ -186,3 +186,52 @@ app.use(router)
 + MongoDB 不需要设计表结构
 + 可以任意的往里面存数据，没有结构性这一说
 
+### 启动和关闭数据库
+
+主要参考[菜鸟文档mongoDB 教程](http://www.runoob.com/mongodb/mongodb-tutorial.html)
+
+启动：
+```shell
+# mongodb 默认使用执行 mongod 命令所处盘符根目录下的 /data/db  作为自己的数据储存目录
+# 所以第一次执行该命令前要先手动创建一个数据存储目录
+mongod
+```
+修改默认的数据储存目录：
+```shell
+mongod --dbpath=数据存储目录路径
+```
+停止： 直接`Ctrl + c` 就可以了
+
+### 链接和退出数据库
+
+链接：
+```shell
+# 该命令默认链接本地的 MongoDB 服务
+mongo
+```
+退出：
+```shell
+# 在链接状态是输入 exit 退出
+exit
+```
+### 基本命令
+
++ ` show dbs `
+    - 查看显示所有数据库
++ `db`
+    - 当前操作的数据库
+    - MongoDB 中默认的数据库为 test ，因为 test 中没有数据 使用 `show dbs`时并不能看到 test 数据库
++ `use 数据库名称`
+    - 切换到指定的数据库（没有就新建）
++ `db.dropDatabase()`
+    - 在当前数据库中执行 `db.dropDatabase()` 就会删除当前数据库
++ `db.createCollection()`
+    - MongoDB 中使用 createCollection() 方法来创建集合
+    - 语法格式: db.createCollection(name, options)
+    - 参数：'name'-> 集合名称 ；'options'-> 可选参数
++ `show collections`
+    - 查看已有集合
+
+### 在 Node 中如何操作 MongoDB 数据库
+
+
