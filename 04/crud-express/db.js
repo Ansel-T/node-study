@@ -27,7 +27,7 @@
              callback(err);
          }
          let students = JSON.parse(data).students;
-         student.id = students[students.length - 1].id + 1;
+         student.id = +students[students.length - 1].id + 1;
          students.push(student);
          var fileData = JSON.stringify({students});
          fs.writeFile(dbPath,fileData,function (err) {
@@ -69,7 +69,7 @@
           }
           let studentsArr = JSON.parse(data).students;
           let info = studentsArr.find(function (v,i) {
-              return v.id === student.id;
+              return Number(v.id) === Number(student.id);
           })
 
           for(let key in student){

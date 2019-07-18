@@ -3,6 +3,10 @@ const fs = require('fs');
 const router = express.Router();
 const students = require('./db');
 
+router.get('/',function (req,res) {
+    res.redirect('/students');
+})
+
 router.get('/students',function (req,res) {
     students.find(function (err,students) {
         if(err){
