@@ -230,8 +230,41 @@ exit
     - 语法格式: db.createCollection(name, options)
     - 参数：'name'-> 集合名称 ；'options'-> 可选参数
 + `show collections`
-    - 查看已有集合
+    - 查看当前db的所有集合
 
 ### 在 Node 中如何操作 MongoDB 数据库
+#### 官方推荐包 node-mongodb-native
+#### 第三方 mongoose
+mongoose：基于官方的`mongodb`包再次封装
+
++ 官方指南：[指南](https://mongoosejs.com/docs/guide.html)
++ 官方api文档：[api文档](https://mongoosejs.com/docs/api.html)
+
+#### 1.MongoDB 数据库基本概念
++ 可以有多个数据库
++ 一个数据库中可有有多个集合
++ 一个集合中可有有多个文档
++ 文档结构很灵活，没有任何限制
++ MongoDB非常的灵活，不需要像MySQL一样先创建数据库、表、设计表结构
+ - 在这里只需要：当你需要插入数据的时候，只需要指往哪个数据库的那个集合操作就可以了
+ - 一切都有MongoDb来帮你自动完成建库表这件事
+
+```
+{
+   qq:{
+       user:[
+           {name:"zhangsan",age:12},
+           {name:"lisi",age:12},
+           ......
+       ]
+   },
+   taobao:{
+
+   },
+   wexin:{
+
+   }
+}
+```
 
 
