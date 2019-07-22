@@ -231,6 +231,12 @@ exit
     - 参数：'name'-> 集合名称 ；'options'-> 可选参数
 + `show collections`
     - 查看当前db的所有集合
++ `db.collection[name].drop()`
+    - 查看当前选定集合，删除成功，则 drop() 方法返回 true，否则返回 false。
++ `db.collection[name].save() 或者 insert()`
+    - 往当前集合插入数据
++ `db.collection[name].find()`
+    - 查看当前集合下的所有数据
 
 ### 在 Node 中如何操作 MongoDB 数据库
 #### 官方推荐包 node-mongodb-native
@@ -265,6 +271,105 @@ mongoose：基于官方的`mongodb`包再次封装
 
    }
 }
+```
+
+#### mongoose 简单使用
+1. 设计Schema 发布 Model
+```javascript
+var mongoose = require('mongoose')
+
+var Schema = mongoose.Schema
+
+// 1. 连接数据库
+// 指定连接的数据库不需要存在，当你插入第一条数据之后就会自动被创建出来
+mongoose.connect('mongodb://localhost/itcast')
+
+// 2. 设计文档结构（表结构）
+// 字段名称就是表结构中的属性名称
+// 约束的目的是为了保证数据的完整性，不要有脏数据
+const userSchema = new Schema({
+    username:{
+        type:String,
+        required:true //必须项
+    },
+    password:{
+        type:String,
+        required:true
+    }
+})
+
+// 3. 将文档结构发布为模型
+//    mongoose.model 方法就是用来将一个架构发布为 model
+//    第一个参数：传入一个大写名词单数字符串用来表示你的数据库名称
+//                 mongoose 会自动将大写名词的字符串生成 小写复数 的集合名称
+//                 例如这里的 User 最终会变为 users 集合名称
+//    第二个参数：架构 Schema
+//
+//    返回值：模型构造函数
+var User = mongoose.model('User', userSchema)
+```
+2. 数据操作
+```javascript
+ /**
+  * 保存数据
+  */
+var admin = new User({
+    username:"admin",
+    password:"123456"
+})
+
+admin.save(function (err,ret) {
+    if(err){
+        console.log(err);
+        console.log("保存失败")
+        return;
+    }
+    console.log("保存成功",ret);
+
+})
+
+/**
+ * 查询数据
+ */
+
+ User.find(function (err,ret) {
+     if(err){
+         console.log('查询失败',err);
+         return ;
+     }
+     console.log(ret);
+ })
+
+ User.findOne({username:"admin"},function (err,ret) {
+     if(err){
+         console.log("查询失败",err);
+         return;
+     }
+     console.log(ret);
+ })
+
+ /**
+  * 更新数据
+  */
+
+  User.findByIdAndUpdate('5d355bd3aa33712500cc0515',{password:"654321"},function(err,ret){
+      if(err){
+          console.log("更新失败",err);
+          return;
+      }
+      console.log(ret);
+  })
+
+  /**
+   * 删除数据
+   */
+  User.deleteOne({username:"admin"},function(err,ret){
+      if(err){
+          console.log("删除失败",err)
+          return;
+      }
+      console.log(ret);
+  })
 ```
 
 
