@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 // 链接数据库
-mongoose.connect('mongodb://localhost/students',{ useNewUrlParser: true });
 
 //设计文档结构
 const studentSchema = new Schema({

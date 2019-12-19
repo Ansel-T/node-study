@@ -1,13 +1,7 @@
-const express = require('express');
-const fs = require('fs');
-const router = express.Router();
-const Student = require('./models/student');
+var Student = require('../models').Student
 
-router.get('/',function (req,res) {
-    res.redirect('/students');
-})
 
-router.get('/students',function (req,res) {
+exports.showStudent = function (req,res) {
     Student.find(function (err,students) {
         if(err){
             return res.status(500).send('Server error.');
@@ -17,23 +11,25 @@ router.get('/students',function (req,res) {
             students:students
         })
     })
-});
+}
 
-router.get('/students/new',function (req,res) {
+exports.showStudentNew = function (req,res) {
     res.render('new.html');
-});
+};
 
-router.post('/students/new',function (req,res) {
-   new Student(req.body).save(function (err) {
-        if(err){
-            return res.status(500).send('Server error');
-        };
-        res.redirect('/students');
-    })
-});
+ /**
+  * 添加学员数据
+  */
+exports.studentNew = function (req,res) {
+    new Student(req.body).save(function (err) {
+         if(err){
+             return res.status(500).send('Server error');
+         };
+         res.redirect('/students');
+     })
+ }
 
-router.get('/students/edit',function (req,res) {
-    console.log(req.query);
+ exports.showStudentEdit = function (req,res) {
     Student.findById(req.query.id,function (err,info) {
         if(err){
             return res.status(500).send('Server error');
@@ -43,18 +39,24 @@ router.get('/students/edit',function (req,res) {
         });
     })
 
-});
+}
 
-router.post('/students/edit',function (req,res) {
+ /**
+  * 更新学员数据
+  */
+ exports.studentEdit = function (req,res) {
     Student.findByIdAndUpdate(req.body.id,req.body,function (err) {
         if(err){
             return res.status(500).send('Server error');
         };
         res.redirect('/students');
     })
-});
+}
 
-router.get('/students/delete',function (req,res) {
+  /**
+   * 删除学员数据
+   */
+ exports.studentDelete = function (req,res) {
     Student.deleteOne({"_id":req.query.id},function (err) {
         if(err){
             console.log(err);
@@ -62,6 +64,6 @@ router.get('/students/delete',function (req,res) {
         }
         res.redirect('/students');
     })
-});
+}
 
-module.exports = router;
+
