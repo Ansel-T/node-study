@@ -2,6 +2,10 @@ const fs = require("fs");
 const path = require("path");
 const time = new Date().getTime();
 
+/* 忽略目录数组 */
+const ignoreDirectoryArr = ["lib"];
+
+
 function init(){
     let tagetPath = __dirname;
     eachFilePath(tagetPath);
@@ -18,7 +22,9 @@ function eachFilePath(path) {
         let filePath = path+'/'+v;
         let stat = fs.statSync(filePath); //获取文件信息
         if(stat.isDirectory()){
-            eachFilePath(filePath);
+            if(ignoreDirectoryArr.indexOf(v) === -1){
+                eachFilePath(filePath);
+            }
         }else{
             let fileNameArr = v.split(".");
             if(fileNameArr[1] === "html"){
